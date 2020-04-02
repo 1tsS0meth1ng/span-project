@@ -4,7 +4,7 @@ from soccerleague.objects.match import Match
 
 class League:
     __league_name: str = None
-    __matches: Collection[Match] = []
+    __matches: Collection[Match] = {}
 
     def __init__(self, name):
         self.league_name = name
@@ -25,4 +25,7 @@ class League:
 
     @property
     def matches(self) -> Collection[Match]:
+        return self.__matches
+
+    def add_match(self, match_draw):
         pass
