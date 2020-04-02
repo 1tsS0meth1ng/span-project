@@ -158,3 +158,17 @@ class Match:
             return self.__team_1
         else:
             return None
+
+    def __eq__(self, other):
+        if other.id == self.id and other.team_1 == self.team_1 and other.team_2 == self.team_2 and \
+                other.team_1_score == self.team_1_score and other.team_2_score == self.team_2_score:
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        hash_value: str = str(self.match_id)
+        return hash(self.__repr__())

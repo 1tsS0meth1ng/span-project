@@ -17,15 +17,15 @@ class TestLeague(TestCase):
         self.team_6 = SoccerTeam('team 6')
         self.team_7 = SoccerTeam('team 7')
 
-        self.matches = []
+        self.matches = set()
 
         self.match_draw = Match(self.team_1, 0, self.team_2, 0)
         self.match_team_2_win_team_3 = Match(self.team_2, 1, self.team_3, 0)
         self.match_team_1_win_team_2 = Match(self.team_1, 3, self.team_2, 2)
 
-        self.matches.append(self.match_draw)
-        self.matches.append(self.match_team_2_win_team_3)
-        self.matches.append(self.match_team_1_win_team_2)
+        self.matches.add(self.match_draw)
+        self.matches.add(self.match_team_2_win_team_3)
+        self.matches.add(self.match_team_1_win_team_2)
 
     def test_init(self):
         league_name = 'Test League'
@@ -46,15 +46,15 @@ class TestLeague(TestCase):
         # test no matches added
         league_name = 'Test League'
         league = League(league_name)
-        self.assertEqual(league.matches, [])
+        self.assertSetEqual(league.matches, set())
 
         # test matches setter should not be settable
         with self.assertRaises(AttributeError):
-            league.matches = []
+            league.matches = {1, 2, 3}
 
         # test match add
         league.add_match(self.match_draw)
-        match_list_1 = [self.match_draw]
+        match_list_1 = {self.match_draw}
         self.assertEqual(league.matches, match_list_1)
 
         # test add multiple
@@ -65,3 +65,8 @@ class TestLeague(TestCase):
             league_2.add_match(i)
 
         self.assertEqual(league_2.matches, self.matches)
+
+    def test_leader_board(self):
+        league_name = 'Test League'
+        league = League(league_name)
+        self.assertEqual(league.leader_board, [])

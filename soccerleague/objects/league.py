@@ -4,7 +4,7 @@ from soccerleague.objects.match import Match
 
 class League:
     __league_name: str = None
-    __matches: Collection[Match] = {}
+    __matches = set()
 
     def __init__(self, name):
         self.league_name = name
@@ -24,8 +24,8 @@ class League:
             raise TypeError('League name needs to be of type str')
 
     @property
-    def matches(self) -> Collection[Match]:
+    def matches(self) -> set:
         return self.__matches
 
-    def add_match(self, match_draw):
-        pass
+    def add_match(self, match):
+        self.__matches.add(match)
