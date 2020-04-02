@@ -1,12 +1,23 @@
+from typing import Collection
+
+
 class League:
+    __league_name: str = None
+    __matches: Collection[Match] = []
 
     def __init__(self, name):
-        pass
+        self.league_name = name
 
     @property
     def league_name(self):
-        pass
+        return self.__league_name
+
+    @league_name.setter
+    def league_name(self, value):
+        if type(value) is str:
+            if value != '':
+                self.__league_name = value
 
     @property
-    def matches(self):
+    def matches(self) -> Collection[Match]:
         pass

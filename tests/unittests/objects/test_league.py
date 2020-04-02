@@ -19,5 +19,3 @@ class TestLeague(TestCase):
         incorrect_league_name_type = None
         with self.assertRaises(TypeError):
             league = League(incorrect_league_name_type)
-
-
