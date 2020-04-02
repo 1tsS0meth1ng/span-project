@@ -1,3 +1,4 @@
+import uuid
 from typing import Optional
 
 from soccerleague.objects.soccerteam import SoccerTeam
@@ -11,6 +12,7 @@ class Match:
     __team_2: SoccerTeam = None
     __team_1_score: int = None
     __team_2_score: int = None
+    __match_id: uuid = uuid.uuid4()
 
     def __init__(self, team_1: SoccerTeam, team_1_score: int, team_2: SoccerTeam, team_2_score: int):
         """
@@ -104,6 +106,12 @@ class Match:
                 raise TypeError('Score 2 cannot be negative')
         else:
             raise TypeError('Score 2 needs to be of type int')
+
+    @property
+    def match_id(self):
+        """ match_id: uuid object which represents the matches id
+        """
+        return self.__match_id
 
     def get_winner(self) -> Optional[SoccerTeam]:
         """ A function which determines which Soccer Team has won using their scores
