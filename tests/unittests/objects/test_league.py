@@ -15,7 +15,12 @@ class TestLeague(TestCase):
         with self.assertRaises(ValueError):
             league = League(empty_league_name)
 
-        # test empty league name
+        # test incorrect league name type
         incorrect_league_name_type = None
         with self.assertRaises(TypeError):
             league = League(incorrect_league_name_type)
+
+
+    def test_matches(self):
+
+        pass

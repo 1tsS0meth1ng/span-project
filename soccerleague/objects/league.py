@@ -1,4 +1,5 @@
 from typing import Collection
+from soccerleague.objects.match import Match
 
 
 class League:
@@ -17,6 +18,10 @@ class League:
         if type(value) is str:
             if value != '':
                 self.__league_name = value
+            else:
+                raise ValueError('League name cannot be an empty string')
+        else:
+            raise TypeError('League name needs to be of type str')
 
     @property
     def matches(self) -> Collection[Match]:
