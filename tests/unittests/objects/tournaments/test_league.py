@@ -60,16 +60,6 @@ class TestLeague(TestCase):
         league = League(league_name)
         self.assertEqual(league.league_name, league_name)
 
-        # test empty league name
-        empty_league_name = ''
-        with self.assertRaises(ValueError):
-            league = League(empty_league_name)
-
-        # test incorrect league name type
-        incorrect_league_name_type = None
-        with self.assertRaises(TypeError):
-            league = League(incorrect_league_name_type)
-
     def test_matches(self):
         # test no matches added
         league_name = 'Test League'

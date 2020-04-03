@@ -2,6 +2,12 @@ from abc import ABC, abstractmethod
 
 
 class Competitor(ABC):
+    """ A class which represents a competitor
+    Attributes
+    ----------
+     __competitor_name : str
+        The competitor's name
+    """
 
     def __init__(self, competitor_name: str):
         """Init of the Competitor class

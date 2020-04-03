@@ -7,20 +7,29 @@ from soccerleague.businessobjects.competitors.competitor import Competitor
 
 class Match(ABC):
     """ A match with both teams and both teams scores
-
-        """
+        Attributes
+        ----------
+        __team_1 : Competitor
+            A private variable holding the first competitor in the match
+        __team_2 : Competitor
+            A private variable holding the second competitor in the match
+        __team_1_score : int
+            A private variable holding the first competitor's score in the match
+        __team_2_score : int
+            A private variable holding the second competitor's score in the match
+    """
 
     def __init__(self, team_1: Competitor, team_1_score: int, team_2: Competitor, team_2_score: int):
         """
 
         Parameters
         ----------
-        team_1 : SoccerTeam
-            The first team in the match
+        team_1 : Competitor
+            The first competitor in the match
         team_1_score : int
             The first teams score
-        team_2 : SoccerTeam
-            The second team in the match
+        team_2 : Competitor
+            The second competitor in the match
         team_2_score : int
             The second teams score
 
@@ -117,28 +126,22 @@ class Match(ABC):
 
     @abstractmethod
     def get_winner(self) -> Optional[Competitor]:
-        """ A function which determines which Soccer Team has won using their scores
-
-        The function compares the team 1's score and team 2's score by subtracting the values.
-        It then compares the values to 0(ie >, <).
-        if > then team 1 won
-        if < then team 2 won
-        else then a draw and nobody won
+        """ A function which determines which competitor has won using their scores
 
         Returns
         -------
-        Optional[SoccerTeam]
+        Optional[Competitor]
             Returns the winning soccer team else if it is a draw. returns None
         """
         pass
 
     @abstractmethod
     def get_loser(self) -> Optional[Competitor]:
-        """ A function which determines which Soccer Team has lost using their scores
+        """ A function which determines which competitor has lost using their scores
 
         Returns
         -------
-        Optional[SoccerTeam]
+        Optional[Competitor]
             Returns the losing competitor else if it is a draw. returns None
         """
         pass
