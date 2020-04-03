@@ -1,18 +1,16 @@
+import uuid
+from abc import ABC, abstractmethod
 from typing import Optional
 
-from soccerleague.objects.soccerteam import SoccerTeam
+from soccerleague.businessobjects.competitors.competitor import Competitor
 
 
-class Match:
+class Match(ABC):
     """ A match with both teams and both teams scores
 
-    """
-    __team_1: SoccerTeam = None
-    __team_2: SoccerTeam = None
-    __team_1_score: int = None
-    __team_2_score: int = None
+        """
 
-    def __init__(self, team_1: SoccerTeam, team_1_score: int, team_2: SoccerTeam, team_2_score: int):
+    def __init__(self, team_1: Competitor, team_1_score: int, team_2: Competitor, team_2_score: int):
         """
 
         Parameters
@@ -31,13 +29,19 @@ class Match:
         TypeException
             Incorrect Parameter Types
         """
+        self.__team_1: Competitor = None
+        self.__team_2: Competitor = None
+        self.__team_1_score: int = None
+        self.__team_2_score: int = None
+        self.__match_id: uuid = uuid.uuid4()
+
         self.team_1 = team_1
         self.team_1_score = team_1_score
         self.team_2 = team_2
         self.team_2_score = team_2_score
 
     @property
-    def team_1(self) -> SoccerTeam:
+    def team_1(self) -> Competitor:
         """team_1: Soccer Team object for the first soccer team
 
         The setter checks if the correct type (SoccerTeam) is being set else it raises a TypeError
@@ -46,14 +50,14 @@ class Match:
         return self.__team_1
 
     @team_1.setter
-    def team_1(self, team: SoccerTeam):
-        if type(team) is SoccerTeam:
+    def team_1(self, team: Competitor):
+        if isinstance(team, Competitor):
             self.__team_1 = team
         else:
             raise TypeError('Team 1 needs to be of type Team')
 
     @property
-    def team_2(self) -> SoccerTeam:
+    def team_2(self) -> Competitor:
         """team_2: Soccer Team object for the second soccer team
 
         The setter checks if the correct type (SoccerTeam) is being set else it raises a TypeError
@@ -61,8 +65,8 @@ class Match:
         return self.__team_2
 
     @team_2.setter
-    def team_2(self, team: SoccerTeam):
-        if type(team) is SoccerTeam:
+    def team_2(self, team: Competitor):
+        if isinstance(team, Competitor):
             self.__team_2 = team
         else:
             raise TypeError('Team 2 needs to be of type Team')
@@ -105,7 +109,14 @@ class Match:
         else:
             raise TypeError('Score 2 needs to be of type int')
 
-    def get_winner(self) -> Optional[SoccerTeam]:
+    @property
+    def match_id(self):
+        """ match_id: uuid object which represents the matches id
+        """
+        return self.__match_id
+
+    @abstractmethod
+    def get_winner(self) -> Optional[Competitor]:
         """ A function which determines which Soccer Team has won using their scores
 
         The function compares the team 1's score and team 2's score by subtracting the values.
@@ -119,34 +130,29 @@ class Match:
         Optional[SoccerTeam]
             Returns the winning soccer team else if it is a draw. returns None
         """
-        difference = self.__team_1_score - self.__team_2_score
+        pass
 
-        if difference > 0:
-            return self.__team_1
-        elif difference < 0:
-            return self.__team_2
-        else:
-            return None
-
-    def get_loser(self) -> Optional[SoccerTeam]:
+    @abstractmethod
+    def get_loser(self) -> Optional[Competitor]:
         """ A function which determines which Soccer Team has lost using their scores
-
-        The function compares the team 1's score and team 2's score by subtracting the values.
-        It then compares the values to 0(ie >, <).
-        if > then team 1 lost
-        if < then team 2 lost
-        else then a draw and nobody lost
 
         Returns
         -------
         Optional[SoccerTeam]
-            Returns the losing soccer team else if it is a draw. returns None
+            Returns the losing competitor else if it is a draw. returns None
         """
-        difference = self.__team_1_score - self.__team_2_score
+        pass
 
-        if difference > 0:
-            return self.__team_2
-        elif difference < 0:
-            return self.__team_1
+    def __eq__(self, other):
+        if other.id == self.id and other.team_1 == self.team_1 and other.team_2 == self.team_2 and \
+                other.team_1_score == self.team_1_score and other.team_2_score == self.team_2_score:
+            return True
         else:
-            return None
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        hash_value: str = str(self.match_id)
+        return hash(self.__repr__())
