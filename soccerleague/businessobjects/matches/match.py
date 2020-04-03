@@ -157,5 +157,4 @@ class Match(ABC):
         return not self.__eq__(other)
 
     def __hash__(self):
-        hash_value: str = str(self.match_id)
         return hash(self.__repr__())

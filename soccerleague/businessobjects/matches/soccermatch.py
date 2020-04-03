@@ -55,3 +55,6 @@ class SoccerMatch(Match):
             return self.team_1
         else:
             return None
+
+    def __hash__(self):
+        return hash(self.__repr__())

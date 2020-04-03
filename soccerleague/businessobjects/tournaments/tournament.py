@@ -27,7 +27,7 @@ class Tournament(ABC):
         self.__tournament_name: str = None
         self._leader_board: dict = {}
         self.__matches: set = set()
-        self.league_name = name
+        self.tournament_name = name
 
     @property
     def tournament_name(self):
