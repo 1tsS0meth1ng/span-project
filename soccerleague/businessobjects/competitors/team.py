@@ -1,4 +1,4 @@
-from soccerleague.businessobjects.competitor.competitor import Competitor
+from soccerleague.businessobjects.competitors.competitor import Competitor
 
 
 class Team(Competitor):

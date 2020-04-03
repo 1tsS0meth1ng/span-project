@@ -1,3 +1,3 @@
-from soccerleague.objects.soccerteam import SoccerTeam
-from soccerleague.objects.league import League
-from soccerleague.objects.soccermatch import Match
+from soccerleague.businessobjects.competitors.soccerteam import *
+from soccerleague.businessobjects.tournaments import *
+from soccerleague.businessobjects.matches import *

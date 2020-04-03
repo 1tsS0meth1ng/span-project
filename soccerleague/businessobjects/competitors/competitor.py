@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class Competitor(ABC):
-    __competitor_name: str = None
 
     def __init__(self, competitor_name: str):
         """Init of the Competitor class
@@ -14,6 +13,7 @@ class Competitor(ABC):
         competitor_name : str
             The competitor's name
         """
+        __competitor_name: str = None
         self.competitor_name = competitor_name
 
     @property

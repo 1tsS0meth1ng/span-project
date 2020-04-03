@@ -1,4 +1,4 @@
-from soccerleague.businessobjects.competitor.team import Team
+from soccerleague.businessobjects.competitors.team import Team
 
 
 class SoccerTeam(Team):
@@ -18,7 +18,7 @@ class SoccerTeam(Team):
             Returns True if this soccer team's name is < the other team, Else returns False
 
         """
-        if self.team_name < other.team_name:
+        if self.competitor_name < other.competitor_name:
             return True
         else:
             return False

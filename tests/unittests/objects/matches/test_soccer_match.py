@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from soccerleague import SoccerMatch
-from soccerleague import SoccerTeam
+from soccerleague.businessobjects.matches import SoccerMatch
+from soccerleague.businessobjects.competitors import SoccerTeam
 
 
 class TestMatch(TestCase):

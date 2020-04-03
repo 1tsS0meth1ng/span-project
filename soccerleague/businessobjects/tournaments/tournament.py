@@ -1,14 +1,14 @@
 from abc import ABC, abstractmethod
 
-from soccerleague.objects.soccermatch import Match
+from soccerleague.businessobjects.matches.match import Match
 
 
 class Tournament(ABC):
-    __league_name: str = None
-    __leader_board: dict = {}
-    __matches: set = set()
 
     def __init__(self, name):
+        __league_name: str = None
+        self.__leader_board: dict = {}
+        self.__matches: set = set()
         self.league_name = name
 
     @property

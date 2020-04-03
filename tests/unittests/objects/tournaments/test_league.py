@@ -98,4 +98,3 @@ class TestLeague(TestCase):
             league.add_match(match)
 
         self.assertListEqual(league.leader_board, self.leader_board)
-

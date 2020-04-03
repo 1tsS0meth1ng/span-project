@@ -1,14 +1,12 @@
 from typing import Optional
 from unittest import TestCase
 
-from soccerleague import Match
-from soccerleague import Team
+from soccerleague.businessobjects.matches import Match
+from soccerleague.businessobjects.competitors import Team
 from soccerleague.businessobjects.competitors import Competitor
 
 
 class TestMatchClass(Match):
-    def __init__(self, team_1: Competitor, team_1_score: int, team_2: Competitor, team_2_score: int):
-        super().__init__(team_1, team_1_score, team_2, team_2_score)
 
     def get_winner(self) -> Optional[Competitor]:
         pass
@@ -30,7 +28,7 @@ class TestMatch(TestCase):
         team_1_score: int = 0
         team_2_score: int = 0
 
-        match: TestMatch = TestMatch(team_1, team_1_score, team_2, team_2_score)
+        match: TestMatchClass = TestMatchClass(team_1, team_1_score, team_2, team_2_score)
 
         self.assertEqual(match.team_1.competitor_name, team_1_name)
         self.assertEqual(match.team_2.competitor_name, team_2_name)
@@ -45,11 +43,11 @@ class TestMatch(TestCase):
         # test with negative score 1
         score_value = -1
         with self.assertRaises(TypeError):
-            match: TestMatch = TestMatch(team_1, score_value, team_2, team_2_score)
+            match: TestMatchClass = TestMatchClass(team_1, score_value, team_2, team_2_score)
 
         # test with negative score 1
         with self.assertRaises(TypeError):
-            match: TestMatch = TestMatch(team_1, team_1_score, team_2, score_value)
+            match: TestMatchClass = TestMatchClass(team_1, team_1_score, team_2, score_value)
 
     # def test_winner_loser_function(self):
     #     # test with valid values

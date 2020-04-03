@@ -1,4 +1,4 @@
-from soccerleague.objects.tournament import Tournament
+from soccerleague.businessobjects.tournaments.tournament import Tournament
 
 
 class League(Tournament):
