@@ -1,14 +1,15 @@
 from unittest import TestCase
 
-from soccerleague.objects import Match
-from soccerleague.objects.league import League
+from soccerleague.objects.soccermatch import Match
 from soccerleague.objects.soccerteam import SoccerTeam
 
 from importlib.resources import open_text
 from random import randint, choices
 
+from soccerleague.objects.tournament import Tournament
 
-class TestLeague(TestCase):
+
+class TestTournament(TestCase):
 
     def setUp(self):
         self.teams = []
@@ -18,7 +19,7 @@ class TestLeague(TestCase):
                 self.teams.append(SoccerTeam(team_text.replace('\n', '')))
 
         self.matches = set()
-        leader_board_temp = {}
+        self.leader_board = {}
 
         self.match_draw = Match(self.teams[0], 0, self.teams[1], 0)
         self.match_team_2_win_team_3 = Match(self.teams[1], 1, self.teams[2], 0)
@@ -34,48 +35,44 @@ class TestLeague(TestCase):
             winner = match.get_winner()
             loser = match.get_loser()
             if winner is not None:
-                if leader_board_temp.get(winner) is None:
-                    leader_board_temp[winner] = 3
+                if self.leader_board.get(winner) is None:
+                    self.leader_board[winner] = 3
                 else:
-                    leader_board_temp[winner] += 3
+                    self.leader_board[winner] += 3
 
-                if leader_board_temp.get(loser) is None:
-                    leader_board_temp[loser] = 0
+                if self.leader_board.get(loser) is None:
+                    self.leader_board[loser] = 0
             else:
 
-                if leader_board_temp.get(match.team_1) is None:
-                    leader_board_temp[match.team_1] = 1
+                if self.leader_board.get(match.team_1) is None:
+                    self.leader_board[match.team_1] = 1
                 else:
-                    leader_board_temp[match.team_1] += 1
+                    self.leader_board[match.team_1] += 1
 
-                if leader_board_temp.get(match.team_2) is None:
-                    leader_board_temp[match.team_2] = 1
+                if self.leader_board.get(match.team_2) is None:
+                    self.leader_board[match.team_2] = 1
                 else:
-                    leader_board_temp[match.team_2] += 1
-
-        self.leader_board = [(key, value) for key, value in sorted(leader_board_temp.items(), key=lambda kv: (kv[1],
-                                                                                                              kv[0]),
-                                                                   reverse=True)]
+                    self.leader_board[match.team_2] += 1
 
     def test_init(self):
         league_name = 'Test League'
-        league = League(league_name)
+        league = Tournament(league_name)
         self.assertEqual(league.league_name, league_name)
 
         # test empty league name
         empty_league_name = ''
         with self.assertRaises(ValueError):
-            league = League(empty_league_name)
+            league = Tournament(empty_league_name)
 
         # test incorrect league name type
         incorrect_league_name_type = None
         with self.assertRaises(TypeError):
-            league = League(incorrect_league_name_type)
+            league = Tournament(incorrect_league_name_type)
 
     def test_matches(self):
         # test no matches added
         league_name = 'Test League'
-        league = League(league_name)
+        league = Tournament(league_name)
         self.assertSetEqual(league.matches, set())
 
         # test matches setter should not be settable
@@ -84,10 +81,19 @@ class TestLeague(TestCase):
 
         # test add multiple matches
         league_name_2 = 'Test League'
-        league_2 = League(league_name_2)
+        league_2 = Tournament(league_name_2)
         self.assertSetEqual(league_2.matches, set())
 
         for i in self.matches:
             league_2.add_match(i)
         self.assertSetEqual(league_2.matches, self.matches)
 
+    def test_leader_board(self):
+        league_name = 'Test League'
+        league = Tournament(league_name)
+        self.assertEqual(league.leader_board, [])
+
+        for match in self.matches:
+            league.add_match(match)
+
+        self.assertListEqual(league.leader_board, self.leader_board)
