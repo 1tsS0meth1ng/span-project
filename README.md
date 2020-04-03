@@ -1,10 +1,16 @@
 # Soccer League Manager
+<<<<<<< Updated upstream
 ##Requirements
 Python 3.7  
 ##Run Details
+=======
+## Requirements
+Python 3.7  
+## Run Details
+>>>>>>> Stashed changes
 1. Download the code.
-2. Open Terminal within the span-project directory
-3. Run the script by entering "python(3) -m soccerleague" and hitting enter
+2. Open Terminal within the span-project directory.
+3. Run the script by entering "python(3) -m soccerleague" and hitting enter.
 
 # Screens
 ## Main View
@@ -19,22 +25,22 @@ Input the number of the menu item which you would like to interact with:
 
 ### 1. View a list of the current leagues
 Prints a list of the registered leagues.  
-If no leagues are registered "No tournaments registered" will be displayed
+If no leagues are registered "No tournaments registered" will be displayed.
 
 ### 2. Add a league
-Allows the user to add a league  
+Allows the user to add a league.  
 Inputs:
-1. Requests a league name
+1. Requests a league name.
 
 ### 3. View a select league
-Navigates to a leagues page after the user inputs a valid league name  
+Navigates to a leagues page after the user inputs a valid league name.  
 Inputs:
-1. Requests a league name
+1. Requests a league name.
 
-If an invalid league name is input "Invalid tournament name" will be output
+If an invalid league name is input "Invalid tournament name" will be output.
 
 ### 4. Quit
-Ends the program execution
+Ends the program execution.
 
 ## Tournament Management Screen
 ```
@@ -46,22 +52,22 @@ Input the number of the menu item which you would like to interact with:
 ```
 
 ### 1. Import matches
-Imports values from a file to populate the matches  
+Imports values from a file to populate the matches.  
 
 Inputs:
-1. Requests file directory
+1. Requests file directory.
 
-If the file cannot be accessed "The given file cannot be accessed" will be displayed
+If the file cannot be accessed "The given file cannot be accessed" will be displayed.
 
 ### 2. View Leader Board
 Displays the current leader board with the current data.
 Examples:  
-If empty
+If empty:
 ```
 Leader Board:
 ------------------------------------------------------
 ```
-If not empty (test data used)  
+If not empty (test data used):  
 ```
 Leader Board:
 1. Tarantulas 6 pts
@@ -72,4 +78,4 @@ Leader Board:
 ------------------------------------------------------
 ```
 ### 3. Go back
-Returns to the main view
+Returns to the main view.
