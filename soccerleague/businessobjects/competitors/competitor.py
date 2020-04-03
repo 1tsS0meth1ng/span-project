@@ -40,3 +40,7 @@ class Competitor(ABC):
     @abstractmethod
     def __lt__(self, other):
         pass
+
+    @abstractmethod
+    def __hash__(self):
+        pass

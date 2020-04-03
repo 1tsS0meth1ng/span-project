@@ -22,3 +22,6 @@ class SoccerTeam(Team):
             return True
         else:
             return False
+
+    def __hash__(self):
+        return hash(self.competitor_name)
