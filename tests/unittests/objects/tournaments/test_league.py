@@ -1,11 +1,9 @@
-from unittest import TestCase
-
-from soccerleague.objects import Match
-from soccerleague.objects.league import League
-from soccerleague.objects.soccerteam import SoccerTeam
-
 from importlib.resources import open_text
 from random import randint, choices
+from unittest import TestCase
+
+from soccerleague import SoccerTeam, League
+from soccerleague import SoccerMatch
 
 
 class TestLeague(TestCase):
@@ -20,16 +18,16 @@ class TestLeague(TestCase):
         self.matches = set()
         leader_board_temp = {}
 
-        self.match_draw = Match(self.teams[0], 0, self.teams[1], 0)
-        self.match_team_2_win_team_3 = Match(self.teams[1], 1, self.teams[2], 0)
-        self.match_team_1_win_team_2 = Match(self.teams[2], 3, self.teams[1], 2)
+        self.match_draw = SoccerMatch(self.teams[0], 0, self.teams[1], 0)
+        self.match_team_2_win_team_3 = SoccerMatch(self.teams[1], 1, self.teams[2], 0)
+        self.match_team_1_win_team_2 = SoccerMatch(self.teams[2], 3, self.teams[1], 2)
 
         for counter in range(len(self.teams) * 10):
             team_1, team_2 = choices(self.teams, k=2)
             score_1 = randint(0, 10)
             score_2 = randint(0, 10)
 
-            match = Match(team_1, score_1, team_2, score_2)
+            match = SoccerMatch(team_1, score_1, team_2, score_2)
             self.matches.add(match)
             winner = match.get_winner()
             loser = match.get_loser()
@@ -90,4 +88,14 @@ class TestLeague(TestCase):
         for i in self.matches:
             league_2.add_match(i)
         self.assertSetEqual(league_2.matches, self.matches)
+
+    def test_leader_board(self):
+        league_name = 'Test League'
+        league = League(league_name)
+        self.assertEqual(league.leader_board, [])
+
+        for match in self.matches:
+            league.add_match(match)
+
+        self.assertListEqual(league.leader_board, self.leader_board)
 

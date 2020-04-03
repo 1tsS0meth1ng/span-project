@@ -1,0 +1,24 @@
+from soccerleague.businessobjects.competitor.team import Team
+
+
+class SoccerTeam(Team):
+    """ A concrete Team used to represent a soccer team
+    """
+
+    def __lt__(self, other: "SoccerTeam"):
+        """
+        Parameters
+        ----------
+        other : SoccerTeam
+            The soccer team which is being compared to this soccer team
+
+        Returns
+        -------
+        bool
+            Returns True if this soccer team's name is < the other team, Else returns False
+
+        """
+        if self.team_name < other.team_name:
+            return True
+        else:
+            return False

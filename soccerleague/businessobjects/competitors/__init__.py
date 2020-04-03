@@ -1,0 +1,3 @@
+from soccerleague.businessobjects.competitor.competitor import Competitor
+from soccerleague.businessobjects.competitor.soccerteam import SoccerTeam
+from soccerleague.businessobjects.competitor.team import Team
