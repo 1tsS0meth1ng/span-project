@@ -1,12 +1,14 @@
-from typing import Collection
-from soccerleague.objects.match import Match
+from soccerleague.objects.tournament import Tournament
+from soccerleague.objects.soccermatch import Match
 
 
-class League:
+class League(Tournament):
     __league_name: str = None
     __matches = set()
+    __leader_board: dict = {}
 
     def __init__(self, name):
+
         self.league_name = name
 
     @property
@@ -14,7 +16,7 @@ class League:
         return self.__league_name
 
     @league_name.setter
-    def league_name(self, value):
+    def league_name(self, value: str):
         if type(value) is str:
             if value != '':
                 self.__league_name = value
@@ -27,5 +29,31 @@ class League:
     def matches(self) -> set:
         return self.__matches
 
-    def add_match(self, match):
+    def add_match(self, match: Match):
+        winner = match.get_winner()
+        loser = match.get_loser()
+        if winner is not None:
+            if self.__leader_board.get(winner) is None:
+                self.__leader_board[winner] = 3
+            else:
+                self.__leader_board[winner] += 3
+
+            if self.__leader_board.get(loser) is None:
+                self.__leader_board[loser] = 0
+        else:
+
+            if self.__leader_board.get(match.team_1) is None:
+                self.__leader_board[match.team_1] = 1
+            else:
+                self.__leader_board[match.team_1] += 1
+
+            if self.__leader_board.get(match.team_2) is None:
+                self.__leader_board[match.team_2] = 1
+            else:
+                self.__leader_board[match.team_2] += 1
         self.__matches.add(match)
+
+    @property
+    def leader_board(self) -> list:
+        return [(key, value) for key, value in sorted(self.__leader_board.items(), key=lambda kv: (kv[1], kv[0]),
+                                                      reverse=True)]

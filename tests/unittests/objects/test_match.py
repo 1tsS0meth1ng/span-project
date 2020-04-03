@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from soccerleague.objects.match import Match
+from soccerleague.objects.soccermatch import Match
 from soccerleague.objects.soccerteam import SoccerTeam
 
 

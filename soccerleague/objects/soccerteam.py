@@ -31,3 +31,8 @@ class SoccerTeam:
         else:
             raise TypeError('Team name needs to be of type str')
 
+    def __lt__(self, other):
+        if self.team_name < other.team_name:
+            return True
+        else:
+            return False
