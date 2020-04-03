@@ -2,7 +2,7 @@ from soccerleague.businessobjects.competitors.team import Team
 
 
 class SoccerTeam(Team):
-    """ A concrete Team used to represent a soccer team
+    """ A specialization of Team used to represent a soccer team
     """
 
     def __lt__(self, other: "SoccerTeam"):

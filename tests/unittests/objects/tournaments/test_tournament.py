@@ -22,6 +22,9 @@ class TestMatch(Match):
 
 class TestTournamentClass(Tournament):
 
+    def increment_score(self, winner, loser, match):
+        pass
+
     def leader_board_output(self, leader_board):
         pass
 
@@ -75,16 +78,6 @@ class TestTournament(TestCase):
         league_name = 'Test League'
         league = TestTournamentClass(league_name)
         self.assertEqual(league.league_name, league_name)
-
-        # test empty league name
-        empty_league_name = ''
-        with self.assertRaises(ValueError):
-            league = TestTournamentClass(empty_league_name)
-
-        # test incorrect league name type
-        incorrect_league_name_type = None
-        with self.assertRaises(TypeError):
-            league = TestTournamentClass(incorrect_league_name_type)
 
     def test_matches(self):
         # test no matches added
