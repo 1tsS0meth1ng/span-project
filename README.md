@@ -1,7 +1,7 @@
 # Soccer League Manager
-###Requirements
-Python 3.7
-#Run Details
+##Requirements
+Python 3.7  
+##Run Details
 1. Download the code.
 2. Open Terminal within the span-project directory
 3. Run the script by entering "python(3) -m soccerleague" and hitting enter
